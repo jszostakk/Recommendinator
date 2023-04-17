@@ -42,6 +42,7 @@ uprzednio żadnego tytułu.
 * Bazy Danych – Kaggle -> CSV
 * Workspace/System Kontroli Wersji – Google Colab
 * Task Manager - Jira
+
 https://colab.research.google.com/drive/13ULzUI2c1Oy9Ay6sV5Jx4h9k98H4hEzK?usp=sharing
 
 ## 4. Harmonogram pracy
