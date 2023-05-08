@@ -16,6 +16,11 @@ def score() :
     q_movies = data.copy().loc[data['vote_count'] >= quantile]
 
 
+#   weighted rating (WR) = (v ÷ (v+m)) × R + (m ÷ (v+m)) × C
+#   R = average for the movie (mean) = (Rating)
+#   v = number of votes for the movie = (votes)
+#   m (quantile) = minimum votes required to be listed in the Top 250 (currently 3000)
+#   C (mean) = the mean vote across the whole report (currently 6.9)
     def weighted_rating(x, quantile=quantile, mean=mean):
         v = x['vote_count']
         R = x['vote_average']

@@ -13,11 +13,13 @@ def print_hi(name):
 if __name__ == '__main__':
     print_hi('PyCharm')
 proba = 0
-while (proba < 4) :
-    tytul = input()
-    print(get_recommendations(tytul))
-    proba = proba + 1
+#while (proba < 10) :
+ #   tytul = input()
+#  print(get_recommendations(tytul))
+ #   datap = get_recommendations(tytul)
+  #  #print(datap.head(5))
+   # proba = proba + 1
 
-#score()
+score()
 #datafile()
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

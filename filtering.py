@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 from score import datafile
 from ast import literal_eval
+import difflib
 
 
 datafile = datafile()
@@ -39,7 +40,6 @@ def clean_data(x):
     if isinstance(x, list):
         return [str.lower(i.replace(" ", "")) for i in x]
     else:
-        #Check if director exists. If not, return empty string
         if isinstance(x, str):
             return str.lower(x.replace(" ", ""))
         else:
@@ -64,13 +64,22 @@ indices = pd.Series(datafile.index, index=datafile['title_y'])
 
 
 def get_recommendations(title):
+    list_of_all_titles = datafile['title_y'].tolist()
+    find_close_match = difflib.get_close_matches(title, list_of_all_titles)
+    if find_close_match:
+        close_match = find_close_match[0]
+        print("Propozycje dla filmu : " + close_match)
+    else:
+        return "Doesn't find this movie, try check the title"
     # Get index given the title
-    idx = indices[title]
+    idx = indices[close_match]
 
     # Get similarty score of all movies with that movie
     sim_scores = list(enumerate(cosine_sim[idx]))
+    print(sim_scores)
 
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+    print("Sorted sim : " + sim_scores)
 
     sim_scores = sim_scores[1:15]
 
