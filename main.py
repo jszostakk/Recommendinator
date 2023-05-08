@@ -11,7 +11,7 @@ def print_hi(name):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    print("Hi! Write down title of the movie : ")
 proba = 0
 while (proba < 10) :
     tytul = input()
