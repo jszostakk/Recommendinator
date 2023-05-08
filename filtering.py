@@ -76,10 +76,8 @@ def get_recommendations(title):
 
     # Get similarty score of all movies with that movie
     sim_scores = list(enumerate(cosine_sim[idx]))
-    print(sim_scores)
 
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-    print("Sorted sim : " + sim_scores)
 
     sim_scores = sim_scores[1:15]
 
