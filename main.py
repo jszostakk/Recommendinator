@@ -1,5 +1,6 @@
 # This is a sample Python script.
 import random
+import re
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
@@ -11,18 +12,23 @@ def print_hi(name):
 
 def get_five_movies(tytul):
     proba = 0
-    recommendations = []
 
-    while (proba < 20):
+    titles = []
+
+    while (proba < 10):
         #tytul = input()
         #print(get_recommendations(tytul))
         datap = get_recommendations(tytul)
-        recommendations.append(datap)
-        # print(datap.head(5))
-        proba = proba + 1
-    random_sample = random.sample(recommendations, 5)
 
-    return random_sample
+        titles.append(datap.values)
+
+        proba = proba + 1
+    result = []
+    for i in range(10):
+        result.append(titles[1][i])
+    print(result[1])
+
+    return result
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
