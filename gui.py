@@ -2,6 +2,7 @@ from pathlib import Path
 
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 
+from main import get_five_movies
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"assets/frame0")
@@ -62,7 +63,7 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
+    command=lambda: print(get_five_movies(entry_1.get())),
     relief="flat"
 )
 button_1.place(
@@ -90,80 +91,80 @@ canvas.create_text(
     font=("NerkoOne Regular", 32 * -1)
 )
 
-button_image_2 = PhotoImage(
-    file=relative_to_assets("button_2.png"))
-button_2 = Button(
-    image=button_image_2,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_2 clicked"),
-    relief="flat"
-)
-button_2.place(
-    x=603.0,
-    y=601.0,
-    width=234.0,
-    height=390.0
-)
-
-button_image_3 = PhotoImage(
-    file=relative_to_assets("button_3.png"))
-button_3 = Button(
-    image=button_image_3,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_3 clicked"),
-    relief="flat"
-)
-button_3.place(
-    x=322.0,
-    y=601.0,
-    width=234.0,
-    height=390.0
-)
-
-button_image_4 = PhotoImage(
+film1 = PhotoImage(
     file=relative_to_assets("button_4.png"))
-button_4 = Button(
-    image=button_image_4,
+przycisk_film1 = Button(
+    image=film1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_4 clicked"),
+    command=lambda: print("film1"),
     relief="flat"
 )
-button_4.place(
+przycisk_film1.place(
     x=41.0,
     y=601.0,
     width=234.0,
     height=390.0
 )
 
-button_image_5 = PhotoImage(
+film2 = PhotoImage(
+    file=relative_to_assets("button_3.png"))
+przycisk_film2 = Button(
+    image=film2,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("film2"),
+    relief="flat"
+)
+przycisk_film2.place(
+    x=322.0,
+    y=601.0,
+    width=234.0,
+    height=390.0
+)
+
+film3 = PhotoImage(
+    file=relative_to_assets("button_2.png"))
+przycisk_film3 = Button(
+    image=film3,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("film3"),
+    relief="flat"
+)
+przycisk_film3.place(
+    x=603.0,
+    y=601.0,
+    width=234.0,
+    height=390.0
+)
+
+film4 = PhotoImage(
     file=relative_to_assets("button_5.png"))
-button_5 = Button(
-    image=button_image_5,
+przycisk_film4 = Button(
+    image=film4,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_5 clicked"),
     relief="flat"
 )
-button_5.place(
+przycisk_film4.place(
     x=884.0,
     y=601.0,
     width=234.0,
     height=390.0
 )
 
-button_image_6 = PhotoImage(
+film5 = PhotoImage(
     file=relative_to_assets("button_6.png"))
-button_6 = Button(
-    image=button_image_6,
+przycisk_film5 = Button(
+    image=film5,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_6 clicked"),
     relief="flat"
 )
-button_6.place(
+przycisk_film5.place(
     x=1165.0,
     y=601.0,
     width=234.0,
