@@ -239,6 +239,22 @@ canvas.create_text(
     font=("NerkoOne Regular", 32 * -1)
 )
 
+button_image_1 = PhotoImage(
+    file=relative_to_assets("button_1.png"))
+button_1 = Button(
+    image=button_image_1,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print(get_movies(entry_1.get())),
+    relief="flat"
+)
+button_1.place(
+    x=875.10107421875,
+    y=330.8022155761719,
+    width=101.66497802734375,
+    height=46.92230224609375
+)
+
 canvas.create_text(
     32.0,
     440.0,
@@ -252,7 +268,7 @@ canvas.create_text(
     911.07470703125,
     693.66796875,
     anchor="nw",
-    text="title1",
+    text="",
     fill="#000000",
     font=("NerkoOne Regular", 32 * -1),
     tags="one"
@@ -262,7 +278,7 @@ canvas.create_text(
     691.32177734375,
     693.66796875,
     anchor="nw",
-    text="title1",
+    text="",
     fill="#000000",
     font=("NerkoOne Regular", 32 * -1),
     tags="two"
@@ -272,7 +288,7 @@ canvas.create_text(
     471.5693359375,
     693.66796875,
     anchor="nw",
-    text="title1",
+    text="",
     fill="#000000",
     font=("NerkoOne Regular", 32 * -1),
     tags="three"
@@ -282,7 +298,7 @@ canvas.create_text(
     251.81640625,
     693.66796875,
     anchor="nw",
-    text="title1",
+    text="",
     fill="#000000",
     font=("NerkoOne Regular", 32 * -1),
     tags="four"
@@ -292,7 +308,7 @@ canvas.create_text(
     32.0634765625,
     693.66796875,
     anchor="nw",
-    text="title1",
+    text="",
     fill="#000000",
     font=("NerkoOne Regular", 32 * -1),
     tags="five"
