@@ -8,7 +8,7 @@ from main import get_five_movies
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"assetsv2/frame0")
-URL_PREFIX = "https://image.tmdb.org/t/p/w500/"
+URL_PREFIX = "https://image.tmdb.org/t/p/w500"
 
 
 def relative_to_assets(path: str) -> Path:
