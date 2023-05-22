@@ -64,6 +64,7 @@ def get_movies(x):
     #     width=182.9969482421875,
     #     height=220
     # )
+
     canvas.create_text(
         691.32177734375,
         693.66796875,
