@@ -228,7 +228,7 @@ entry_1 = Entry(
     bg="#D9D9D9",
     fg="#000716",
     highlightthickness=0,
-    font=("NerkoOne", 24 * -1)
+    font=("Nerko One", 24 * -1)
 )
 entry_1.place(
     x=153.0,
