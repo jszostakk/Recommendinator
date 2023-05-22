@@ -1,6 +1,6 @@
 from pathlib import Path
-
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import *
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, StringVar
 from PIL import ImageTk
 from urllib.request import urlopen
 
@@ -10,6 +10,10 @@ OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"assetsv2/frame0")
 URL_PREFIX = "https://image.tmdb.org/t/p/w500"
 
+options = [
+    "Title",
+    "Director"
+]
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
@@ -34,7 +38,7 @@ def get_movies(x):
         anchor="nw",
         text=movies[4],
         fill="#000000",
-        font=("NerkoOne Regular", 16 * -1),
+        font=("Nerko One", 16 * -1),
         width=150,
         tags="five"
     )
@@ -66,7 +70,7 @@ def get_movies(x):
         anchor="nw",
         text=movies[3],
         fill="#000000",
-        font=("NerkoOne Regular", 16 * -1),
+        font=("Nerko One", 16 * -1),
         width=150,
         tags="four"
     )
@@ -99,7 +103,7 @@ def get_movies(x):
         anchor="nw",
         text=movies[2],
         fill="#000000",
-        font=("NerkoOne Regular", 16 * -1),
+        font=("Nerko One", 16 * -1),
         width=150,
         tags="three"
     )
@@ -132,7 +136,7 @@ def get_movies(x):
         anchor="nw",
         text=movies[1],
         fill="#000000",
-        font=("NerkoOne Regular", 16 * -1),
+        font=("Nerko One", 16 * -1),
         width=150,
         tags="two"
     )
@@ -165,7 +169,7 @@ def get_movies(x):
         anchor="nw",
         text=movies[0],
         fill="#000000",
-        font=("NerkoOne Regular", 16 * -1),
+        font=("Nerko One", 16 * -1),
         width=150,
         tags="one"
     )
@@ -192,12 +196,13 @@ def get_movies(x):
     #     height=220
     # )
 
-
 window = Tk()
+dropdown_variable = StringVar(window)
+dropdown_variable.set("Title")
 
 window.geometry("1126x801")
 window.configure(bg = "#FFFFFF")
-
+window.title("Recommendinator")
 
 canvas = Canvas(
     window,
@@ -221,7 +226,8 @@ entry_1 = Entry(
     bd=0,
     bg="#D9D9D9",
     fg="#000716",
-    highlightthickness=0
+    highlightthickness=0,
+    font=("NerkoOne", 24 * -1)
 )
 entry_1.place(
     x=153.0,
@@ -236,8 +242,16 @@ canvas.create_text(
     anchor="nw",
     text="Search for your favourite movie or TV series:",
     fill="#000000",
-    font=("NerkoOne Regular", 32 * -1)
+    font=("Nerko One", 32 * -1)
 )
+
+dropdown = OptionMenu(window, dropdown_variable, *options)
+dropdown.pack()
+dropdown.config(font=("Nerko One", 20 * -1))
+dropdown.place(x=750,
+               y=330,
+               width=125,
+               height=50)
 
 button_image_1 = PhotoImage(
     file=relative_to_assets("button_1.png"))
@@ -261,7 +275,7 @@ canvas.create_text(
     anchor="nw",
     text="Results:",
     fill="#000000",
-    font=("NerkoOne Regular", 32 * -1)
+    font=("Nerko One", 32 * -1)
 )
 
 canvas.create_text(
