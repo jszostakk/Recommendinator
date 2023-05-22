@@ -5,6 +5,7 @@ from PIL import ImageTk
 from urllib.request import urlopen
 
 from main import get_five_movies
+from filtering import get_five_posters
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"assetsv2/frame0")
@@ -20,7 +21,8 @@ def relative_to_assets(path: str) -> Path:
 
 def get_movies(x):
     movies = get_five_movies(x)
-    #posters = get_five_posters(movies)   ---------------------------------------------TUTAJ PROSZE O POSTERY-------------------------------------------
+    posters = get_five_posters(movies)
+    print("Tytul : " + movies[4] + " Plakat : " + posters[4])
 
     canvas.delete("one")
     canvas.delete("two")
@@ -42,28 +44,29 @@ def get_movies(x):
         width=150,
         tags="five"
     )
-    # u4 = urlopen(URL_PREFIX + posters[4])
-    # fifth_poster_raw = u4.read()
-    # u4.close()
-    # button_image_4 = ImageTk.PhotoImage(
-    #     fifth_poster=fifth_poster_raw)
-    # button_4 = Button(
-    #     image=button_image_4,
-    #     borderwidth=0,
-    #     highlightthickness=0,
-    #     command=lambda: print("button_4 clicked"),
-    #     relief="flat",
-    #     tags="fifthPoster"
-    # )
-    # button_4.image = button_image_4
-    # button_4.pack()
-    #
-    # button_4.place(
-    #     x=911.07470703125,
-    #     y=470.0050354003906,
-    #     width=182.9969482421875,
-    #     height=220
-    # )
+    u4 = urlopen(URL_PREFIX + posters[4])
+    print(u4)
+    fifth_poster_raw = u4.read()
+    u4.close()
+    button_image_4 = ImageTk.PhotoImage(
+        fifth_poster=fifth_poster_raw)
+    button_4 = Button(
+        image=button_image_4,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_4 clicked"),
+        relief="flat",
+        tags="fifthPoster"
+    )
+    button_4.image = button_image_4
+    button_4.pack()
+
+    button_4.place(
+        x=911.07470703125,
+        y=470.0050354003906,
+        width=182.9969482421875,
+        height=220
+    )
 
     canvas.create_text(
         691.32177734375,

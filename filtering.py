@@ -85,3 +85,15 @@ def get_recommendations(title):
 
     return datafile['title_y'].iloc[movie_indices]
 
+def get_five_posters(movies):
+    fields = ['title', 'backdrop_path']
+    poster_list = []
+    df = pd.read_csv('movie_data.csv', lineterminator='\n', skipinitialspace=True, usecols=fields)
+    df.set_index('title')
+    for movie in movies:
+        poster_path = df[df['title'].str.match(movie)].head(1).get("backdrop_path").to_string(index=False)
+        if poster_path == 'Series([], )':
+            poster_list.append('/sRvXNDItGlWCqtO3j6wks52FmbD.jpg')
+        else:
+            poster_list.append(poster_path)
+    return poster_list
