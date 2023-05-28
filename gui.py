@@ -39,7 +39,7 @@ def getSingleMovie(x):
     buttons = []
 
     button_image_0 = ImageTk.PhotoImage(
-        file=relative_to_assets("poster.png"))
+        file=relative_to_assets("poster.png")) #============================== getter na poster
     button_0 = Button(
         image=button_image_0,
         borderwidth=0,
