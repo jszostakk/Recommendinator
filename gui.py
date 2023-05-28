@@ -47,16 +47,18 @@ def get_movies(x):
     u4 = urlopen(URL_PREFIX + posters[4])
     print(u4)
     fifth_poster_raw = u4.read()
+    print(type(fifth_poster_raw))
     u4.close()
+    file_format = 'jpg'
     button_image_4 = ImageTk.PhotoImage(
-        fifth_poster=fifth_poster_raw)
+        data=fifth_poster_raw, format=file_format)
     button_4 = Button(
         image=button_image_4,
         borderwidth=0,
         highlightthickness=0,
         command=lambda: print("button_4 clicked"),
         relief="flat",
-        tags="fifthPoster"
+        # tags="fifthPoster"
     )
     button_4.image = button_image_4
     button_4.pack()
@@ -78,28 +80,28 @@ def get_movies(x):
         width=150,
         tags="four"
     )
-    # u3 = urlopen(URL_PREFIX + posters[3])
-    # fourth_poster_raw = u3.read()
-    # u3.close()
-    # button_image_3 = ImageTk.PhotoImage(
-    #     fourth_poster=fourth_poster_raw)
-    # button_3 = Button(
-    #     image=button_image_3,
-    #     borderwidth=0,
-    #     highlightthickness=0,
-    #     command=lambda: print("button_3 clicked"),
-    #     relief="flat",
-    #     tags="fourthPoster"
-    # )
-    # button_3.image = button_image_3
-    # button_3.pack()
-    #
-    # button_3.place(
-    #     x=691.32177734375,
-    #     y=470.0050354003906,
-    #     width=182.9969482421875,
-    #     height=220
-    # )
+    u3 = urlopen(URL_PREFIX + posters[3])
+    fourth_poster_raw = u3.read()
+    u3.close()
+    button_image_3 = ImageTk.PhotoImage(
+        data=fourth_poster_raw, format=file_format)
+    button_3 = Button(
+        image=button_image_3,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_3 clicked"),
+        relief="flat",
+        # tags="fourthPoster"
+    )
+    button_3.image = button_image_3
+    button_3.pack()
+
+    button_3.place(
+        x=691.32177734375,
+        y=470.0050354003906,
+        width=182.9969482421875,
+        height=220
+    )
 
     canvas.create_text(
         471.5693359375,
@@ -111,28 +113,28 @@ def get_movies(x):
         width=150,
         tags="three"
     )
-    # u2 = urlopen(URL_PREFIX + posters[2])
-    # third_poster_raw = u2.read()
-    # u2.close()
-    # button_image_2 = ImageTk.PhotoImage(
-    #     third_poster=third_poster_raw)
-    # button_2 = Button(
-    #     image=button_image_2,
-    #     borderwidth=0,
-    #     highlightthickness=0,
-    #     command=lambda: print("button_2 clicked"),
-    #     relief="flat",
-    #     tags="thirdPoster"
-    # )
-    # button_2.image = button_image_2
-    # button_2.pack()
-    #
-    # button_2.place(
-    #     x=471.5693359375,
-    #     y=470.0050354003906,
-    #     width=182.9969482421875,
-    #     height=220
-    # )
+    u2 = urlopen(URL_PREFIX + posters[2])
+    third_poster_raw = u2.read()
+    u2.close()
+    button_image_2 = ImageTk.PhotoImage(
+        data=third_poster_raw, format=file_format)
+    button_2 = Button(
+        image=button_image_2,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_2 clicked"),
+        relief="flat",
+        # tags="thirdPoster"
+    )
+    button_2.image = button_image_2
+    button_2.pack()
+
+    button_2.place(
+        x=471.5693359375,
+        y=470.0050354003906,
+        width=182.9969482421875,
+        height=220
+    )
 
     canvas.create_text(
         251.81640625,
@@ -144,28 +146,28 @@ def get_movies(x):
         width=150,
         tags="two"
     )
-    # u1 = urlopen(URL_PREFIX + posters[1])
-    # second_poster_raw = u1.read()
-    # u1.close()
-    # button_image_1 = ImageTk.PhotoImage(
-    #     second_poster=second_poster_raw)
-    # button_1 = Button(
-    #     image=button_image_1,
-    #     borderwidth=0,
-    #     highlightthickness=0,
-    #     command=lambda: print("button_1 clicked"),
-    #     relief="flat",
-    #     tags="secondPoster"
-    # )
-    # button_1.image = button_image_1
-    # button_1.pack()
-    #
-    # button_1.place(
-    #     x=251.81634521484375,
-    #     y=470.0050354003906,
-    #     width=182.9969482421875,
-    #     height=220
-    # )
+    u1 = urlopen(URL_PREFIX + posters[1])
+    second_poster_raw = u1.read()
+    u1.close()
+    button_image_1 = ImageTk.PhotoImage(
+        data=second_poster_raw, format=file_format)
+    button_1 = Button(
+        image=button_image_1,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_1 clicked"),
+        relief="flat",
+        # tags="secondPoster"
+    )
+    button_1.image = button_image_1
+    button_1.pack()
+
+    button_1.place(
+        x=251.81634521484375,
+        y=470.0050354003906,
+        width=182.9969482421875,
+        height=220
+    )
 
     canvas.create_text(
         32.0634765625,
@@ -177,28 +179,28 @@ def get_movies(x):
         width=150,
         tags="one"
     )
-    # u0 = urlopen(URL_PREFIX + posters[0])
-    # first_poster_raw = u0.read()
-    # u0.close()
-    # button_image_0 = ImageTk.PhotoImage(
-    #     first_poster=first_poster_raw)
-    # button_0 = Button(
-    #     image=button_image_0,
-    #     borderwidth=0,
-    #     highlightthickness=0,
-    #     command=lambda: print("button_0 clicked"),
-    #     relief="flat",
-    #     tags="firstPoster"
-    # )
-    # button_0.image = button_image_0
-    # button_0.pack()
-    #
-    # button_0.place(
-    #     x=32.0634765625,
-    #     y=470.0050354003906,
-    #     width=182.9969482421875,
-    #     height=220
-    # )
+    u0 = urlopen(URL_PREFIX + posters[0])
+    first_poster_raw = u0.read()
+    u0.close()
+    button_image_0 = ImageTk.PhotoImage(
+        data=first_poster_raw, format=file_format)
+    button_0 = Button(
+        image=button_image_0,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_0 clicked"),
+        relief="flat",
+        # tags="firstPoster"
+    )
+    button_0.image = button_image_0
+    button_0.pack()
+
+    button_0.place(
+        x=32.0634765625,
+        y=470.0050354003906,
+        width=182.9969482421875,
+        height=220
+    )
 
 window = Tk()
 dropdown_variable = StringVar(window)
