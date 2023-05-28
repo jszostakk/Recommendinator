@@ -16,13 +16,71 @@ options = [
     "Director"
 ]
 
+canIBack = False
+
+buttons = []
+
+def back():
+    global canIBack
+    if canIBack:
+        canvas.delete("single")
+        for i in buttons:
+            i.destroy()
+        canIBack = False
+        entry_1 = Entry(
+            bd=0,
+            bg="#D9D9D9",
+            fg="#000716",
+            highlightthickness=0,
+            font=("Nerko One", 24 * -1)
+        )
+        entry_1.place(
+            x=153.0,
+            y=334.0,
+            width=722.0,
+            height=42.0
+        )
+        buttons.append(entry_1)
+
+        canvas.create_text(
+            150.0,
+            300.0,
+            anchor="nw",
+            text="Search for your favourite movie or TV series:",
+            fill="#000000",
+            font=("Nerko One", 32 * -1),
+            tags="start"
+        )
+
+        dropdown = OptionMenu(window, dropdown_variable, *options)
+        dropdown.pack()
+        dropdown.config(font=("Nerko One", 20 * -1))
+        dropdown.place(x=750,
+                       y=330,
+                       width=125,
+                       height=50)
+        buttons.append(dropdown)
+
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
-def getSingleMovie():
+def getSingleMovie(x):
+    global canIBack
+    canIBack = True
+    canvas.delete("one")
+    canvas.delete("two")
+    canvas.delete("three")
+    canvas.delete("four")
+    canvas.delete("five")
+    canvas.delete("start")
+    global buttons
+    for i in buttons:
+        i.destroy()
+
+    buttons = []
 
     button_image_1 = PhotoImage(
-        file=relative_to_assets("button_1.png"))
+        file=relative_to_assets("poster.png"))
     button_1 = Button(
         image=button_image_1,
         borderwidth=0,
@@ -36,6 +94,7 @@ def getSingleMovie():
         width=274.5,
         height=359.0
     )
+    buttons.append(button_1)
 
     canvas.create_text(
         312.0,
@@ -43,7 +102,8 @@ def getSingleMovie():
         anchor="nw",
         text="Title",
         fill="#000000",
-        font=("NerkoOne Regular", 40 * -1)
+        font=("NerkoOne Regular", 40 * -1),
+        tags='single'
     )
 
     canvas.create_text(
@@ -52,7 +112,8 @@ def getSingleMovie():
         anchor="nw",
         text="by Director",
         fill="#000000",
-        font=("NerkoOne Regular", 32 * -1)
+        font=("NerkoOne Regular", 32 * -1),
+        tags='single'
     )
 
     canvas.create_text(
@@ -61,32 +122,11 @@ def getSingleMovie():
         anchor="nw",
         text="OpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpis",
         fill="#000000",
-        font=("NerkoOne Regular", 24 * -1)
+        font=("NerkoOne Regular", 24 * -1),
+        width=400,
+        tags='single'
     )
 
-    image_image_1 = PhotoImage(
-        file=relative_to_assets("image_1.png"))
-    image_1 = canvas.create_image(
-        563.0,
-        135.0,
-        image=image_image_1
-    )
-
-    button_image_2 = PhotoImage(
-        file=relative_to_assets("back.png"))
-    button_2 = Button(
-        image=button_image_2,
-        borderwidth=0,
-        highlightthickness=0,
-        command=lambda: print("button_2 clicked"),
-        relief="flat"
-    )
-    button_2.place(
-        x=1014.0,
-        y=744.0,
-        width=101.76605224609375,
-        height=47.120086669921875
-    )
 
 def get_movies(x):
     movies = get_five_movies(x)
@@ -98,11 +138,6 @@ def get_movies(x):
     canvas.delete("three")
     canvas.delete("four")
     canvas.delete("five")
-    canvas.delete("firstPoster")
-    canvas.delete("secondPoster")
-    canvas.delete("thirdPoster")
-    canvas.delete("fourthPoster")
-    canvas.delete("fifthPoster")
     canvas.create_text(
         911.07470703125,
         693.66796875,
@@ -125,9 +160,8 @@ def get_movies(x):
         image=button_image_4,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: getSingleMovie(),
-        relief="flat",
-        # tags="fifthPoster"
+        command=lambda: getSingleMovie(x), #===================================== x = title
+        relief="flat"
     )
     button_4.image = button_image_4
     button_4.pack()
@@ -158,9 +192,8 @@ def get_movies(x):
         image=button_image_3,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: getSingleMovie(),
-        relief="flat",
-        # tags="fourthPoster"
+        command=lambda: getSingleMovie(x), #===================================== x = title
+        relief="flat"
     )
     button_3.image = button_image_3
     button_3.pack()
@@ -191,9 +224,8 @@ def get_movies(x):
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: getSingleMovie(),
-        relief="flat",
-        # tags="thirdPoster"
+        command=lambda: getSingleMovie(x),  #===================================== x = title
+        relief="flat"
     )
     button_2.image = button_image_2
     button_2.pack()
@@ -224,9 +256,8 @@ def get_movies(x):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: getSingleMovie(),
-        relief="flat",
-        # tags="secondPoster"
+        command=lambda: getSingleMovie(x), #===================================== x = title
+        relief="flat"
     )
     button_1.image = button_image_1
     button_1.pack()
@@ -257,9 +288,8 @@ def get_movies(x):
         image=button_image_0,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: getSingleMovie(),
-        relief="flat",
-        # tags="firstPoster"
+        command=lambda: getSingleMovie(x), #===================================== x = title
+        relief="flat"
     )
     button_0.image = button_image_0
     button_0.pack()
@@ -270,6 +300,10 @@ def get_movies(x):
         width=182.9969482421875,
         height=220
     )
+
+    buttonsx=[button_0, button_1, button_2, button_3, button_4]
+    for b in buttonsx:
+        buttons.append(b)
 
 window = Tk()
 dropdown_variable = StringVar(window)
@@ -290,13 +324,6 @@ canvas = Canvas(
 )
 
 canvas.place(x = 0, y = 0)
-entry_image_1 = PhotoImage(
-    file=relative_to_assets("entry_1.png"))
-entry_bg_1 = canvas.create_image(
-    512.5,
-    354.5,
-    image=entry_image_1
-)
 entry_1 = Entry(
     bd=0,
     bg="#D9D9D9",
@@ -310,6 +337,7 @@ entry_1.place(
     width=722.0,
     height=42.0
 )
+buttons.append(entry_1)
 
 canvas.create_text(
     150.0,
@@ -317,7 +345,8 @@ canvas.create_text(
     anchor="nw",
     text="Search for your favourite movie or TV series:",
     fill="#000000",
-    font=("Nerko One", 32 * -1)
+    font=("Nerko One", 32 * -1),
+    tags="start"
 )
 
 dropdown = OptionMenu(window, dropdown_variable, *options)
@@ -327,6 +356,7 @@ dropdown.place(x=750,
                y=330,
                width=125,
                height=50)
+buttons.append(dropdown)
 
 button_image_1 = PhotoImage(
     file=relative_to_assets("button_1.png"))
@@ -344,71 +374,28 @@ button_1.place(
     height=46.92230224609375
 )
 
-canvas.create_text(
-    32.0,
-    440.0,
-    anchor="nw",
-    text="Results:",
-    fill="#000000",
-    font=("Nerko One", 32 * -1)
-)
-
-canvas.create_text(
-    911.07470703125,
-    693.66796875,
-    anchor="nw",
-    text="",
-    fill="#000000",
-    font=("NerkoOne Regular", 32 * -1),
-    tags="one"
-)
-
-canvas.create_text(
-    691.32177734375,
-    693.66796875,
-    anchor="nw",
-    text="",
-    fill="#000000",
-    font=("NerkoOne Regular", 32 * -1),
-    tags="two"
-)
-
-canvas.create_text(
-    471.5693359375,
-    693.66796875,
-    anchor="nw",
-    text="",
-    fill="#000000",
-    font=("NerkoOne Regular", 32 * -1),
-    tags="three"
-)
-
-canvas.create_text(
-    251.81640625,
-    693.66796875,
-    anchor="nw",
-    text="",
-    fill="#000000",
-    font=("NerkoOne Regular", 32 * -1),
-    tags="four"
-)
-
-canvas.create_text(
-    32.0634765625,
-    693.66796875,
-    anchor="nw",
-    text="",
-    fill="#000000",
-    font=("NerkoOne Regular", 32 * -1),
-    tags="five"
-)
-
 image_image_1 = PhotoImage(
     file=relative_to_assets("image_1.png"))
 image_1 = canvas.create_image(
     563.0,
     135.0,
     image=image_image_1
+)
+
+button_image_2 = PhotoImage(
+    file=relative_to_assets("back.png"))
+button_2 = Button(
+    image=button_image_2,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: back(),
+    relief="flat"
+)
+button_2.place(
+    x=10.0,
+    y=10.0,
+    width=101.76605224609375,
+    height=47.120086669921875
 )
 
 window.resizable(False, False)
