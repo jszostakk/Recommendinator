@@ -19,6 +19,75 @@ options = [
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
+def getSingleMovie():
+
+    button_image_1 = PhotoImage(
+        file=relative_to_assets("button_1.png"))
+    button_1 = Button(
+        image=button_image_1,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_1 clicked"),
+        relief="flat"
+    )
+    button_1.place(
+        x=37.0,
+        y=271.0,
+        width=274.5,
+        height=359.0
+    )
+
+    canvas.create_text(
+        312.0,
+        271.0,
+        anchor="nw",
+        text="Title",
+        fill="#000000",
+        font=("NerkoOne Regular", 40 * -1)
+    )
+
+    canvas.create_text(
+        312.0,
+        319.0,
+        anchor="nw",
+        text="by Director",
+        fill="#000000",
+        font=("NerkoOne Regular", 32 * -1)
+    )
+
+    canvas.create_text(
+        364.0,
+        367.0,
+        anchor="nw",
+        text="OpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpis",
+        fill="#000000",
+        font=("NerkoOne Regular", 24 * -1)
+    )
+
+    image_image_1 = PhotoImage(
+        file=relative_to_assets("image_1.png"))
+    image_1 = canvas.create_image(
+        563.0,
+        135.0,
+        image=image_image_1
+    )
+
+    button_image_2 = PhotoImage(
+        file=relative_to_assets("back.png"))
+    button_2 = Button(
+        image=button_image_2,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_2 clicked"),
+        relief="flat"
+    )
+    button_2.place(
+        x=1014.0,
+        y=744.0,
+        width=101.76605224609375,
+        height=47.120086669921875
+    )
+
 def get_movies(x):
     movies = get_five_movies(x)
     posters = get_five_posters(movies)
@@ -56,7 +125,7 @@ def get_movies(x):
         image=button_image_4,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_4 clicked"),
+        command=lambda: getSingleMovie(),
         relief="flat",
         # tags="fifthPoster"
     )
@@ -89,7 +158,7 @@ def get_movies(x):
         image=button_image_3,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_3 clicked"),
+        command=lambda: getSingleMovie(),
         relief="flat",
         # tags="fourthPoster"
     )
@@ -122,7 +191,7 @@ def get_movies(x):
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_2 clicked"),
+        command=lambda: getSingleMovie(),
         relief="flat",
         # tags="thirdPoster"
     )
@@ -155,7 +224,7 @@ def get_movies(x):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_1 clicked"),
+        command=lambda: getSingleMovie(),
         relief="flat",
         # tags="secondPoster"
     )
@@ -188,7 +257,7 @@ def get_movies(x):
         image=button_image_0,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_0 clicked"),
+        command=lambda: getSingleMovie(),
         relief="flat",
         # tags="firstPoster"
     )
