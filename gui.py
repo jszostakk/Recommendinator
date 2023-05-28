@@ -20,47 +20,6 @@ canIBack = False
 
 buttons = []
 
-def back():
-    global canIBack
-    if canIBack:
-        canvas.delete("single")
-        for i in buttons:
-            i.destroy()
-        canIBack = False
-        entry_1 = Entry(
-            bd=0,
-            bg="#D9D9D9",
-            fg="#000716",
-            highlightthickness=0,
-            font=("Nerko One", 24 * -1)
-        )
-        entry_1.place(
-            x=153.0,
-            y=334.0,
-            width=722.0,
-            height=42.0
-        )
-        buttons.append(entry_1)
-
-        canvas.create_text(
-            150.0,
-            300.0,
-            anchor="nw",
-            text="Search for your favourite movie or TV series:",
-            fill="#000000",
-            font=("Nerko One", 32 * -1),
-            tags="start"
-        )
-
-        dropdown = OptionMenu(window, dropdown_variable, *options)
-        dropdown.pack()
-        dropdown.config(font=("Nerko One", 20 * -1))
-        dropdown.place(x=750,
-                       y=330,
-                       width=125,
-                       height=50)
-        buttons.append(dropdown)
-
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
@@ -79,56 +38,59 @@ def getSingleMovie(x):
 
     buttons = []
 
-    button_image_1 = PhotoImage(
+    button_image_0 = ImageTk.PhotoImage(
         file=relative_to_assets("poster.png"))
-    button_1 = Button(
-        image=button_image_1,
+    button_0 = Button(
+        image=button_image_0,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_1 clicked"),
         relief="flat"
     )
-    button_1.place(
-        x=37.0,
-        y=271.0,
-        width=274.5,
-        height=359.0
+    button_0.image = button_image_0
+    button_0.pack()
+
+    button_0.place(
+        x=32.0634765625,
+        y=470.0050354003906,
+        width=182.9969482421875,
+        height=220
     )
-    buttons.append(button_1)
+    buttons.append(button_0)
 
     canvas.create_text(
         312.0,
-        271.0,
+        371.0,
         anchor="nw",
-        text="Title",
+        text=x,
         fill="#000000",
-        font=("NerkoOne Regular", 40 * -1),
+        font=("Nerko One", 40 * -1),
         tags='single'
     )
 
     canvas.create_text(
         312.0,
-        319.0,
+        419.0,
         anchor="nw",
-        text="by Director",
+        #text="by "+ getter, ===========================================getter na rezysera
         fill="#000000",
-        font=("NerkoOne Regular", 32 * -1),
+        font=("Nerko One", 32 * -1),
         tags='single'
     )
 
     canvas.create_text(
-        364.0,
-        367.0,
+        312.0,
+        467.0,
         anchor="nw",
-        text="OpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpisOpis",
+        text="", #==================================getter na opis
         fill="#000000",
-        font=("NerkoOne Regular", 24 * -1),
+        font=("Nerko One", 24 * -1),
         width=400,
         tags='single'
     )
 
 
 def get_movies(x):
+    canvas.delete("single")
     movies = get_five_movies(x)
     posters = get_five_posters(movies)
     print("Tytul : " + movies[4] + " Plakat : " + posters[4])
@@ -160,7 +122,7 @@ def get_movies(x):
         image=button_image_4,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: getSingleMovie(x), #===================================== x = title
+        command=lambda: getSingleMovie(movies[4]), #===================================== x = title
         relief="flat"
     )
     button_4.image = button_image_4
@@ -192,7 +154,7 @@ def get_movies(x):
         image=button_image_3,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: getSingleMovie(x), #===================================== x = title
+        command=lambda: getSingleMovie(movies[3]), #===================================== x = title
         relief="flat"
     )
     button_3.image = button_image_3
@@ -224,7 +186,7 @@ def get_movies(x):
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: getSingleMovie(x),  #===================================== x = title
+        command=lambda: getSingleMovie(movies[2]),  #===================================== x = title
         relief="flat"
     )
     button_2.image = button_image_2
@@ -256,7 +218,7 @@ def get_movies(x):
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: getSingleMovie(x), #===================================== x = title
+        command=lambda: getSingleMovie(movies[1]), #===================================== x = title
         relief="flat"
     )
     button_1.image = button_image_1
@@ -288,7 +250,7 @@ def get_movies(x):
         image=button_image_0,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: getSingleMovie(x), #===================================== x = title
+        command=lambda: getSingleMovie(movies[0]), #===================================== x = title
         relief="flat"
     )
     button_0.image = button_image_0
@@ -337,7 +299,6 @@ entry_1.place(
     width=722.0,
     height=42.0
 )
-buttons.append(entry_1)
 
 canvas.create_text(
     150.0,
@@ -356,7 +317,6 @@ dropdown.place(x=750,
                y=330,
                width=125,
                height=50)
-buttons.append(dropdown)
 
 button_image_1 = PhotoImage(
     file=relative_to_assets("button_1.png"))
@@ -380,22 +340,6 @@ image_1 = canvas.create_image(
     563.0,
     135.0,
     image=image_image_1
-)
-
-button_image_2 = PhotoImage(
-    file=relative_to_assets("back.png"))
-button_2 = Button(
-    image=button_image_2,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: back(),
-    relief="flat"
-)
-button_2.place(
-    x=10.0,
-    y=10.0,
-    width=101.76605224609375,
-    height=47.120086669921875
 )
 
 window.resizable(False, False)
