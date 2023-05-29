@@ -11,33 +11,6 @@ def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
-def get_five_movies(tytul):
-    #proba = 0
-
-    titles = []
-    movies = get_recommendations(tytul).head(5)
-    for movie in movies:
-        titles.append(movie)
-    # for movie in movies:
-    #     titles.append(movie.to_string(index=False))
-    #     print(movie)
-    #     print(type(movie))
-    # print("Hej" + movies)
-
-    # while (proba < 10):
-    #     #tytul = input()
-    #     #print(get_recommendations(tytul))
-    #     datap = get_recommendations(tytul)
-    #
-    #     titles.append(datap.values)
-    #
-    #     proba = proba + 1
-    # result = []
-    # for i in range(10):
-    #     result.append(titles[1][i])
-    # print(result[1])
-    return titles
-
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print("Hi! Write down title of the movie : ")

@@ -9,7 +9,7 @@ from filtering import *
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"assetsv2/frame0")
-URL_PREFIX = "https://image.tmdb.org/t/p/w500"
+URL_PREFIX = "https://image.tmdb.org/t/p/w200"
 
 options = [
     "Title",
@@ -90,8 +90,8 @@ def getSingleMovie(x):
         anchor="nw",
         text=get_description(x),  # ==================================getter na opis
         fill="#000000",
-        font=("Nerko One", 24 * -1),
-        width=400,
+        font=("Nerko One", 20 * -1),
+        width=700,
         tags='single'
     )
 
@@ -278,7 +278,7 @@ window = Tk()
 dropdown_variable = StringVar(window)
 dropdown_variable.set("Title")
 
-window.geometry("1126x801")
+window.geometry("1126x750")
 window.configure(bg = "#FFFFFF")
 window.title("Recommendinator")
 
@@ -334,6 +334,7 @@ button_1 = Button(
     command=lambda: print(get_movies(entry_1.get())),
     relief="flat"
 )
+window.win
 button_1.place(
     x=875.10107421875,
     y=330.8022155761719,
@@ -349,5 +350,5 @@ image_1 = canvas.create_image(
     image=image_image_1
 )
 
-window.resizable(False, False)
+window.resizable(True, True)
 window.mainloop()
