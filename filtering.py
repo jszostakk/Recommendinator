@@ -6,8 +6,11 @@ from score import datafile
 from ast import literal_eval
 import difflib
 
-
+pd.set_option('display.max_colwidth', None)
 datafile = datafile()
+fields = ['title', 'backdrop_path']
+df = pd.read_csv('movie_data.csv', lineterminator='\n', skipinitialspace=True, usecols=fields)
+df.set_index('title')
 
 features = ['cast', 'crew', 'keywords', 'genres']
 for feature in features:
@@ -31,6 +34,7 @@ def get_list(x):
     return []
 
 datafile['director'] = datafile['crew'].apply(get_director)
+datafile['director_for_getter'] = datafile['crew'].apply(get_director)
 
 features = ['cast', 'keywords', 'genres']
 for feature in features:
@@ -52,6 +56,7 @@ for feature in features:
 
 def create_soup(x):
     return ' '.join(x['keywords']) + ' ' + ' '.join(x['cast']) + ' ' + x['director'] + ' ' + ' '.join(x['genres'])
+
 datafile['soup'] = datafile.apply(create_soup, axis=1)
 
 count = CountVectorizer(stop_words='english')
@@ -86,10 +91,10 @@ def get_recommendations(title):
     return datafile['title_y'].iloc[movie_indices]
 
 def get_five_posters(movies):
-    fields = ['title', 'backdrop_path']
+    #fields = ['title', 'backdrop_path']
     poster_list = []
-    df = pd.read_csv('movie_data.csv', lineterminator='\n', skipinitialspace=True, usecols=fields)
-    df.set_index('title')
+    #df = pd.read_csv('movie_data.csv', lineterminator='\n', skipinitialspace=True, usecols=fields)
+    #df.set_index('title')
     for movie in movies:
         poster_path = df[df['title'].str.match(movie)].head(1).get("backdrop_path").to_string(index=False)
         if poster_path == 'Series([], )':
@@ -97,3 +102,16 @@ def get_five_posters(movies):
         else:
             poster_list.append(poster_path)
     return poster_list
+
+def get_poster(title):
+    poster_path = df[df['title'].str.match(title)].head(1).get("backdrop_path").to_string(index=False)
+    if poster_path == 'Series([], )':
+        return '/sRvXNDItGlWCqtO3j6wks52FmbD.jpg'
+    else:
+        return poster_path
+
+def get_director(title):
+    return datafile[datafile['title_y'].str.match(title)].head(1).get("director_for_getter").to_string(index=False)
+
+def get_description(title):
+    return datafile[datafile['title_y'].str.match(title)].head(1).get("overview").to_string(index=False)

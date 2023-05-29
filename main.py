@@ -4,7 +4,8 @@ import re
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-from filtering import get_recommendations, get_five_posters
+#from filtering import get_recommendations, get_five_posters
+from filtering import *
 from score import *
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
@@ -51,11 +52,13 @@ if __name__ == '__main__':
 #     #print(datap.head(5))
 #     proba = proba + 1
 
-posters = get_five_posters(["Shrek", "Shrek Forever", "The Adventures of Rocky & Bullwinkle"])
+#posters = get_five_posters(["Shrek", "Shrek Forever", "The Adventures of Rocky & Bullwinkle"])
 #print(posters[2])
 #print(type(posters[2]))
 # print(type(get_recommendations("Shrek")))
-get_five_movies("Shrek")
+#get_five_movies("Shrek")
 #score()
 #datafile()
+print(get_director("Shrek"))
+print(get_description("Shrek"))
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
