@@ -1,7 +1,7 @@
 from pathlib import Path
 from tkinter import *
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, StringVar
-from PIL import ImageTk
+from PIL import ImageTk, Image
 from urllib.request import urlopen
 
 from main import get_five_movies
@@ -19,9 +19,58 @@ options = [
 canIBack = False
 
 buttons = []
-
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
+
+def on_resize(event):
+    # Kod, który zostanie wykonany po zmianie rozmiaru okna
+    #Grafika na samej gorze
+    global image_image_11, resized_image_image_11, new_image_image_11, napis, button_11
+    image_image_11 = Image.open("assetsv2/frame0/image_1.png")
+    resized_image_image_11 = image_image_11.resize((int(event.width), int(event.height*0.35)))
+    new_image_image_11 = ImageTk.PhotoImage(resized_image_image_11)
+    canvas.create_image(
+    0.0,
+    0.0,
+    image=new_image_image_11,
+    anchor="nw")
+    canvas.delete("start")
+    #tekst pod grafiką
+    canvas.create_text(
+        int(0.133*event.width),
+        int(0.4*event.height),
+        anchor="nw",
+        text="Search for your favourite movie or TV series:",
+        fill="#000000",
+        font=("Nerko One", int(-0.04*event.height)),
+        tags="start"
+    )
+
+    #input
+    entry_1.config(width=int(0.6412*event.width))
+    print(int(0.6412*event.width))
+    #entry_1.place(x=int(0.136*event.width), y=int(0.4453*event.height), width=int(0.6412*event.width))
+    # #przycisk submit
+    # button_image_11 = Image.open("assetsv2/frame0/button_1.png")
+    # resized_button_image_11 = button_image_11.resize((int(0.0903*event.width), int(0.062563*event.height)))
+    # new_button_image_11 = ImageTk.PhotoImage(resized_button_image_11)
+    # button_11.destroy()
+    # button_11 = Button(
+    #     image=new_button_image_11,
+    #     borderwidth=0,
+    #     highlightthickness=0,
+    #     command=lambda: print(get_movies(entry_1.get())),
+    #     relief="flat"
+    # )
+    #
+    # button_11.place(
+    #     x=0.777*event.width,
+    #     y=0.441*event.height,
+    #     width=0.0903*event.width,
+    #     height=0.062563*event.height
+    # )
+
+
 
 def getSingleMovie(x):
     global canIBack
@@ -277,6 +326,7 @@ def get_movies(x):
 window = Tk()
 dropdown_variable = StringVar(window)
 dropdown_variable.set("Title")
+window.bind("<Configure>", on_resize)
 
 window.geometry("1126x750")
 window.configure(bg = "#FFFFFF")
@@ -285,8 +335,8 @@ window.title("Recommendinator")
 canvas = Canvas(
     window,
     bg = "#FFFFFF",
-    height = 801,
-    width = 1126,
+    height = 1080,
+    width = 1900,
     bd = 0,
     highlightthickness = 0,
     relief = "ridge"
@@ -298,8 +348,9 @@ entry_1 = Entry(
     bg="#D9D9D9",
     fg="#000716",
     highlightthickness=0,
-    font=("Nerko One", 24 * -1)
+    font=("Nerko One", 24 * -1),
 )
+entry_1.pack()
 entry_1.place(
     x=153.0,
     y=334.0,
@@ -307,23 +358,23 @@ entry_1.place(
     height=42.0
 )
 
-canvas.create_text(
-    150.0,
-    300.0,
-    anchor="nw",
-    text="Search for your favourite movie or TV series:",
-    fill="#000000",
-    font=("Nerko One", 32 * -1),
-    tags="start"
-)
+# canvas.create_text(
+#     150.0,
+#     300.0,
+#     anchor="nw",
+#     text="Search for your favourite movie or TV series:",
+#     fill="#000000",
+#     font=("Nerko One", 32 * -1),
+#     tags="start"
+#  )
 
-dropdown = OptionMenu(window, dropdown_variable, *options)
-dropdown.pack()
-dropdown.config(font=("Nerko One", 20 * -1))
-dropdown.place(x=750,
-               y=330,
-               width=125,
-               height=50)
+# dropdown = OptionMenu(window, dropdown_variable, *options)
+# dropdown.pack()
+# dropdown.config(font=("Nerko One", 20 * -1))
+# dropdown.place(x=750,
+#                y=330,
+#                width=125,
+#                height=50)
 
 button_image_1 = PhotoImage(
     file=relative_to_assets("button_1.png"))
@@ -334,7 +385,7 @@ button_1 = Button(
     command=lambda: print(get_movies(entry_1.get())),
     relief="flat"
 )
-window.win
+
 button_1.place(
     x=875.10107421875,
     y=330.8022155761719,
@@ -342,13 +393,14 @@ button_1.place(
     height=46.92230224609375
 )
 
-image_image_1 = PhotoImage(
-    file=relative_to_assets("image_1.png"))
-image_1 = canvas.create_image(
-    563.0,
-    135.0,
-    image=image_image_1
-)
+# image_image_1 = PhotoImage(
+#     file=relative_to_assets("image_1.png"))
+# image_1 = canvas.create_image(
+#     563.0,
+#     135.0,
+#     image=image_image_1
+# )
+
 
 window.resizable(True, True)
 window.mainloop()
