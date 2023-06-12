@@ -6,29 +6,22 @@
 
 ## 1. Opis tematu projektu
 
-Projekt ma na celu stworzenie aplikacji do polecania filmów i seriali, wykorzystując przy tym zarówno
-Collaborative Filtering oraz Content-Based Filtering. Dodatkowo chcielibyśmy stworzyć GUI 
+Projekt ma na celu stworzenie aplikacji do polecania filmów i seriali, wykorzystując przy tym mechanizm Content-Based Filtering. Dodatkowo chcielibyśmy stworzyć GUI 
 pozwalające na swobodne wykorzystywanie tej aplikacji.
 
 ## 2. Szczegóły Działania Aplikacji
 
 * Po wpisaniu tytułu, który nam się podobał, wyświetli się lista proponowanych filmów i seriali, 
-która zostanie utworzona na podstawie dwóch metod : 
-  * Content-Based Filtering – Wybieranie polecanych filmów na podstawie jego cech, jak 
+która zostanie utworzona na podstawie metody Content-Based Filtering : 
+  * Jest to metoda opierająca się na wybieraniu polecanych filmów na podstawie jego cech, jak 
   reżyser, aktorzy, gatunek, opis, porównując do wpisanego filmu
-  * Collaborative Filtering – Polecanie na podstawie innych użytkowników. Metoda ta 
-  wykorzystywać będzie do tego oceny użytkowników w bazie
-* Dodatkowo chcielibyśmy dodać opcję wyświetlania proponowanych filmów bez wpisywania 
-uprzednio żadnego tytułu.
-* Program będzie wykorzystywał bazę użytkowników oraz filmów wraz z ich ocenami w plikach 
+* Program będzie wykorzystywał bazę filmów oraz seriali w plikach 
 .csv dołączonych do projektu.
-* Strategie wyszukiwania : 
-  * Będzie dostępne wyszukiwanie zarówno po tytule, aktorze oraz reżyserze, jak i 
-  gatunku filmu. 
-  * Wyszukiwanie będzie również odporne na potencjalne błędy w pisowni – biblioteka 
-  difflib.
-  * GUI będzie umożliwiało wpisanie tekstu od użytkownika oraz wyboru kategorii, po której 
-  dany użytkownik chce szukać.
+* Strategie wyszukiwania :
+  * GUI będzie umożliwiało wpisanie tekstu od użytkownika
+  * Wyszukiwanie będzie odporne na potencjalne błędy w pisowni – biblioteka 
+  Difflib.
+  * Wymagane będzie wpisanie przez użytkownika tytułu filmu w języku angielskim.
 
 ## 3. Wykorzystane technologie
   

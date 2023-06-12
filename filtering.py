@@ -2,9 +2,18 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 import numpy as np
-from score import datafile
 from ast import literal_eval
 import difflib
+
+
+def datafile():
+    datafile1 = pd.read_csv("tmdb_5000_credits.csv")
+    datafile2 = pd.read_csv("tmdb_5000_movies.csv")
+
+    datafile1.columns = ['id', 'title', 'cast', 'crew']
+    datafile = datafile2.merge(datafile1, on='id')
+    return datafile
+
 
 pd.set_option('display.max_colwidth', None)
 datafile = datafile()
@@ -16,11 +25,13 @@ features = ['cast', 'crew', 'keywords', 'genres']
 for feature in features:
     datafile[feature] = datafile[feature].apply(literal_eval)
 
+
 def get_director(x):
     for i in x:
         if i['job'] == 'Director':
             return i['name']
     return np.nan
+
 
 def get_list(x):
     if isinstance(x, list):
@@ -30,8 +41,8 @@ def get_list(x):
             names = names[:3]
         return names
 
-
     return []
+
 
 datafile['director'] = datafile['crew'].apply(get_director)
 datafile['director_for_getter'] = datafile['crew'].apply(get_director)
@@ -39,6 +50,7 @@ datafile['director_for_getter'] = datafile['crew'].apply(get_director)
 features = ['cast', 'keywords', 'genres']
 for feature in features:
     datafile[feature] = datafile[feature].apply(get_list)
+
 
 def clean_data(x):
     if isinstance(x, list):
@@ -49,13 +61,16 @@ def clean_data(x):
         else:
             return ''
 
+
 features = ['cast', 'keywords', 'director', 'genres']
 
 for feature in features:
     datafile[feature] = datafile[feature].apply(clean_data)
 
+
 def create_soup(x):
     return ' '.join(x['keywords']) + ' ' + ' '.join(x['cast']) + ' ' + x['director'] + ' ' + ' '.join(x['genres'])
+
 
 datafile['soup'] = datafile.apply(create_soup, axis=1)
 
@@ -73,13 +88,11 @@ def get_recommendations(title):
     find_close_match = difflib.get_close_matches(title, list_of_all_titles)
     if find_close_match:
         close_match = find_close_match[0]
-        print("Propozycje dla filmu : " + close_match)
     else:
         return "Doesn't find this movie, try check the title"
-    # Get index given the title
+
     idx = indices[close_match]
 
-    # Get similarty score of all movies with that movie
     sim_scores = list(enumerate(cosine_sim[idx]))
 
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
@@ -90,55 +103,44 @@ def get_recommendations(title):
 
     return datafile['title_y'].iloc[movie_indices]
 
-def get_five_movies(tytul):
-    #proba = 0
 
+def get_five_movies(tytul):
     titles = []
     movies = get_recommendations(tytul).head(5)
     for movie in movies:
         titles.append(movie)
-    # for movie in movies:
-    #     titles.append(movie.to_string(index=False))
-    #     print(movie)
-    #     print(type(movie))
-    # print("Hej" + movies)
-
-    # while (proba < 10):
-    #     #tytul = input()
-    #     #print(get_recommendations(tytul))
-    #     datap = get_recommendations(tytul)
-    #
-    #     titles.append(datap.values)
-    #
-    #     proba = proba + 1
-    # result = []
-    # for i in range(10):
-    #     result.append(titles[1][i])
-    # print(result[1])
     return titles
 
+
 def get_five_posters(movies):
-    #fields = ['title', 'backdrop_path']
     poster_list = []
-    #df = pd.read_csv('movie_data.csv', lineterminator='\n', skipinitialspace=True, usecols=fields)
-    #df.set_index('title')
     for movie in movies:
         poster_path = df[df['title'].str.match(movie)].head(1).get("backdrop_path").to_string(index=False)
         if poster_path == 'Series([], )':
-            poster_list.append('/sRvXNDItGlWCqtO3j6wks52FmbD.jpg')
+            poster_list.append(None)
         else:
             poster_list.append(poster_path)
     return poster_list
 
+
 def get_poster(title):
     poster_path = df[df['title'].str.match(title)].head(1).get("backdrop_path").to_string(index=False)
     if poster_path == 'Series([], )':
-        return '/sRvXNDItGlWCqtO3j6wks52FmbD.jpg'
+        return None
     else:
         return poster_path
 
+
 def get_director(title):
-    return datafile[datafile['title_y'].str.match(title)].head(1).get("director_for_getter").to_string(index=False)
+    if datafile[datafile['title_y'].str.match(title)].head(1).get("director_for_getter").to_string(
+            index=False) != "Series([], )":
+        return datafile[datafile['title_y'].str.match(title)].head(1).get("director_for_getter").to_string(index=False)
+    else:
+        return "*Director not found*"
+
 
 def get_description(title):
-    return datafile[datafile['title_y'].str.match(title)].head(1).get("overview").to_string(index=False)
+    if datafile[datafile['title_y'].str.match(title)].head(1).get("overview").to_string(index=False) != "Series([], )":
+        return datafile[datafile['title_y'].str.match(title)].head(1).get("overview").to_string(index=False)
+    else:
+        return "*Description not found*"
